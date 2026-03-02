@@ -1,0 +1,15 @@
+# Database Configuration
+includes/connectdb.php
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Local XAMPP/Temp files
+/temp/
+error_log
+php_errors.log
