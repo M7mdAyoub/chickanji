@@ -1,9 +1,7 @@
 -- Chickanji Database Schema
 -- Created by Mohammad Ayoub
--- Run this file to set up the complete database from scratch.
-
-CREATE DATABASE IF NOT EXISTS customers_db;
-USE customers_db;
+-- Import this file into your hosting database via phpMyAdmin.
+-- NOTE: Do NOT include CREATE DATABASE on shared hosting — the database is pre-created for you.
 
 -- Users table
 CREATE TABLE IF NOT EXISTS `users` (
