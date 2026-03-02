@@ -44,9 +44,11 @@ if (isset($_POST['add_menu_item'])) {
     $target_file = $target_dir . time() . "_" . $image_name;
     
     if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+        // Store root-relative path in DB (without ../ prefix)
+        $db_path = "assets/images/" . time() . "_" . $image_name;
         try {
             $stmt = $pdo->prepare("INSERT INTO menu_items (name, description, price, image_path, is_active) VALUES (:name, :desc, :price, :path, 1)");
-            $stmt->execute([':name' => $name, ':desc' => $desc, ':price' => $price, ':path' => $target_file]);
+            $stmt->execute([':name' => $name, ':desc' => $desc, ':price' => $price, ':path' => $db_path]);
             $message = "New item '$name' added successfully!";
         } catch(PDOException $e) {
             $message = "Error adding item: " . $e->getMessage();
@@ -68,9 +70,11 @@ if (isset($_POST['edit_menu_item'])) {
             $image_name = basename($_FILES["image"]["name"]);
             $target_file = $target_dir . time() . "_" . $image_name;
             move_uploaded_file($_FILES["image"]["tmp_name"], $target_file);
+            // Store root-relative path in DB
+            $db_path = "assets/images/" . time() . "_" . $image_name;
             
             $stmt = $pdo->prepare("UPDATE menu_items SET name = :name, description = :desc, price = :price, image_path = :path WHERE id = :id");
-            $stmt->execute([':name' => $name, ':desc' => $desc, ':price' => $price, ':path' => $target_file, ':id' => $id]);
+            $stmt->execute([':name' => $name, ':desc' => $desc, ':price' => $price, ':path' => $db_path, ':id' => $id]);
         } else {
             $stmt = $pdo->prepare("UPDATE menu_items SET name = :name, description = :desc, price = :price WHERE id = :id");
             $stmt->execute([':name' => $name, ':desc' => $desc, ':price' => $price, ':id' => $id]);
