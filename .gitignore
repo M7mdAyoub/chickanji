@@ -1,15 +1,22 @@
-# Database Configuration
+# Database Configuration (contains credentials)
 includes/connectdb.php
 
-# OS files
+# OS generated files
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# IDE files
+# IDE / Editor files
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
 
-# Local XAMPP/Temp files
-/temp/
+# Logs
 error_log
 php_errors.log
+*.log
+
+# Temp & system files
+/temp/
+*.tmp
